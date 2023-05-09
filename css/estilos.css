@@ -1,5 +1,18 @@
+body{
+    margin: auto;
+}
 .contenedorLibros{
     display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: space-between;
+}
+/* .contenedor-hijo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+} */
+.portada{
+    width: 186px;
+    height: 300px;
+
 }
