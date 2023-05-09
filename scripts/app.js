@@ -57,6 +57,7 @@ Vue.component('componente-cards',{
       <div class="contenedorLibros">
         <div class="banner"></div>
             <h1 class="tituloDisney"> {{titulo}} </h1>
+        <div class="contenedorPrincipal">
             <hijos-cards v-for="x in libros"
                 v-bind:key="x.id"
                 v-bind:nombre="x.nombre" 
@@ -66,17 +67,18 @@ Vue.component('componente-cards',{
                 v-bind:img="x.img"
                 v-bind:alt="x.alt">
             </hijos-cards>
+        </div>
         </div>`
 })
 Vue.component('hijos-cards', {
    props:["img","clase","nombre","autor","descripcion","alt","id"],
    template:`
-       <div class="contenedor-hijo">
+       <div class="contenedorHijo">
         <img v-bind:src="img" v-bind:alt="alt" class="portada"/>
 
-        <h2> {{nombre}} </h2>
-        <h3> {{autor}} </h3>
-        <p> {{descripcion}} </p>
+        <h2 class="nombreLibro"> {{nombre}} </h2>
+        <h3 class="nombreAutor" > {{autor}} </h3>
+        <p class="descripcion"> {{descripcion}} </p>
         </div>
    `
 })

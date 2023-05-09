@@ -1,31 +1,62 @@
+@import url("https://use.typekit.net/zhx2quv.css");
 body{
     margin: auto;
     background-color:white;
+    font-family: "montserrat", sans-serif;
+    font-weight: 200;
+    font-style: normal;
 }
 .banner{
     background-image: url(/img/bannerDisney.jpg);
    background-repeat: no-repeat;
-   background-size: cover;
-   height: 550px;
+   background-size: contain;
+   height: 360px;
  
 }
 .tituloDisney{
+    margin-top: 1px;
     text-align: center;
     font-size: 60px;
-    color: blue;
+    color:#1C2D8C;
+    font-family: "montserrat", sans-serif;
+    font-weight: 700;
+    font-style: normal;
 }
-.contenedorLibros{
+.contenedorPrincipal{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 10px;
+    margin: auto;
+    width: 80%;
+}
+.contenedorHijo{
+    background-color: #5D4AD9;
+    color: white;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 20px;
+    width: 300px;
+    border-radius: 25px;
+
 }
-/* .contenedor-hijo{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-} */
 .portada{
     width: 186px;
     height: 300px;
 
 }
+.nombreLibro{
+    font-size: 25px;
+    font-weight: 600;
+    font-style: normal;
+}
+.nombreAutor{
+    font-size: 20px;
+    margin-top: 0px;
+}
+.descripcion{
+    font-size: 16px;
+}
+
