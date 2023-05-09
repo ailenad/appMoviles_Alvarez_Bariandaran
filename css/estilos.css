@@ -1,5 +1,18 @@
 body{
     margin: auto;
+    background-color:white;
+}
+.banner{
+    background-image: url(/img/bannerDisney.jpg);
+   background-repeat: no-repeat;
+   background-size: cover;
+   height: 550px;
+ 
+}
+.tituloDisney{
+    text-align: center;
+    font-size: 60px;
+    color: blue;
 }
 .contenedorLibros{
     display: flex;

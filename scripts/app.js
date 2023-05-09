@@ -55,7 +55,8 @@ Vue.component('componente-cards',{
 },
     template:`
       <div class="contenedorLibros">
-            <h1> {{titulo}} </h1>
+        <div class="banner"></div>
+            <h1 class="tituloDisney"> {{titulo}} </h1>
             <hijos-cards v-for="x in libros"
                 v-bind:key="x.id"
                 v-bind:nombre="x.nombre" 
