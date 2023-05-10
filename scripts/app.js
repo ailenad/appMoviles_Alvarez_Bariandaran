@@ -2,11 +2,11 @@ Vue.component('componente-cards',{
  
    data:function(){
     return{
-        titulo:"Libros Disney",
+        titulo:"Nuestra bibilioteca",
             libros: [
         {
             id:1,
-            img: "img/laSirenita.jpg",
+            img: "img/libros/laSirenita.png",
             clase: "no fav",
             nombre: "La Sirenita",
             autor: "Hans Christian Andersen",
@@ -15,7 +15,7 @@ Vue.component('componente-cards',{
         },
         {
             id:2,
-            img: "img/cenicienta.jpg",
+            img: "img/libros/cenicienta.png",
             clase: "no fav",
             nombre: "Cenicienta",
             autor: "Charles Perrault",
@@ -24,7 +24,7 @@ Vue.component('componente-cards',{
         },
         {
             id:3,
-            img: "img/pocahontas.jpg",
+            img: "img/libros/pocahontas.png",
             clase: "no fav",
             nombre: "Pocahontas",
             autor: "Sabina Colloredo",
@@ -33,7 +33,7 @@ Vue.component('componente-cards',{
         },
         {
             id:4,
-            img: "img/peterpan.jpg",
+            img: "img/libros/peterPan.png",
             clase: "no fav",
             nombre: "Peter Pan",
             autor: "James Matthew Barrie",
@@ -42,12 +42,21 @@ Vue.component('componente-cards',{
         },
         {
             id:5,
-            img: "img/laBellaDurmiente.jpg",
+            img: "img/libros/bellaDurmiente.png",
             clase: "no fav",
             nombre: "La Bella Durmiente",
             autor: "Charles Perrault",
             descripcion: "La bella durmiente trata de una bonita historia de amor sobre una joven princesa condenada a dormir eternamente hasta que llegase a su vida el verdadero amor. Se trata de un cuento que habla sobre la bondad y que ensalza el valor del amor, demostrando que es capaz de superar todos los obstáculos.",
             alt:"Imagen la bella durmiente"
+        },
+         {
+            id:6,
+            img: "img/libros/aladin.jpeg",
+            clase: "no fav",
+            nombre: "Aladdin",
+            autor: "Howard Ashman",
+            descripcion: "Es un joven ladrón de buen corazón que vive en la ciudad árabe de Agrabah junto a su mono mascota Abu. Un día rescata y se hace amigo de la princesa Jasmín, quien se escabulló del palacio para explorar la ciudad, cansada de su vida sobre-protegida.",
+            alt:"imagen aladin"
         }
 
     ],
