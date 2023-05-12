@@ -3,6 +3,7 @@ Vue.component('componente-cards',{
    data:function(){
     return{
         titulo:"Nuestra bibilioteca",
+        
             libros: [
         {
             id:1,
@@ -66,23 +67,23 @@ Vue.component('componente-cards',{
         }
 
     ],
+    mostrarFavoritos: false,
     }
 },
     template:`
       <div class="contenedorLibros">
         <div class="banner"></div>
             <h1 class="tituloDisney"> {{titulo}} </h1>
-    //         <btn-verFav>
-    //         <hijos-cards v-for="n in libros" v-if="n.favoritos=true"
-    //         v-bind:key="n.id"
-    //         v-bind:nombre="n.nombre" 
-    //         v-bind:id="n.id"
-    //         v-bind:autor="n.autor" 
-    //         v-bind:descripcion="n.descripcion" 
-    //         v-bind:img="n.img"
-    //         v-bind:alt="n.alt">
-    //    </hijos-cards>
-    //         </btn-verFav>
+        <button @click="verFavoritos"> Ver favoritos </button>
+                <hijos-cards v-for="x in libros" v-if="mostrarFavoritos "
+                v-bind:key="x.id"
+                v-bind:nombre="x.nombre" 
+                v-bind:id="x.id"
+                v-bind:autor="x.autor" 
+                v-bind:descripcion="x.descripcion" 
+                v-bind:img="x.img"
+                v-bind:alt="x.alt">
+            </hijos-cards>
         <div class="contenedorPrincipal">
             <hijos-cards v-for="x in libros" v-if="x.favoritos===false"
                 v-bind:key="x.id"
@@ -94,74 +95,51 @@ Vue.component('componente-cards',{
                 v-bind:alt="x.alt">
             </hijos-cards>
         </div>
-        </div>`
+        </div>`,
+    methods:{
+        verFavoritos(){
+            this.mostrarFavoritos = true;
+            this.libros = this.libros.filter(libros => libros.favoritos);
+        }
+
+
+
+    }
 })
 Vue.component('hijos-cards', {
  
-   props:["img","clase","nombre","autor","descripcion","alt","id"],
+   props:["img","clase","nombre","autor","descripcion","alt","id","favoritos"],
    template:`
        <div class="contenedorHijo">
         <img v-bind:src="img" v-bind:alt="alt" class="portada"/>
         <h2 class="nombreLibro"> {{nombre}} </h2>
         <h3 class="nombreAutor" > {{autor}} </h3>
         <p class="descripcion"> {{descripcion}} </p>
-        <btn-favoritos></btn-favoritos>
+        <btn-favoritos @agregar-favorito></btn-favoritos>
     
         </div>
    `
 })
 
 Vue.component('btn-favoritos', {
-    props:["favoritos"],
-// data:function(){
-//     return{
-//     // librosFav:[],
-//     favoritos:true
-//     }
-// },
-template:`
-<div>
-<button @click="agregar" class="btn success">Agregar a Favoritos</button>
-</div>
-`,
-methods:{
-    agregar:function(){
-        favoritos=true;
-    }
-}
-})
-
-Vue.component('btn-verFav',{
-    template: `
-    <div>
-    <button @click="ver" class="btn success">Ver Favoritos</button>
+    data:function(){
+        return{
+            favoritos:false,
+           
+        }
+    },
+    template:`
+    <div class="btnAgregar">
+    <button v-if="!favoritos" @click="favoritos=true" class="btn success">Agregar a Favoritos</button>
     </div>
     `,
-    methods:{
-        ver(){
-            this.libros.forEach((favorito) => {
-                if (favorito) 
-                return `
-                <hijos-cards v-for="n in libros" v-if="n.favoritos=true"
-            v-bind:key="n.id"
-            v-bind:nombre="n.nombre" 
-            v-bind:id="n.id"
-            v-bind:autor="n.autor" 
-            v-bind:descripcion="n.descripcion" 
-            v-bind:img="n.img"
-            v-bind:alt="n.alt">
-       </hijos-cards>
-                `
-                {
-                    // Mostrar solo favorito2
-                }
-            }); 
-        }
-    }
+  
 })
 
 
- var app= new Vue({
+
+
+var app= new Vue({
 el: ".contenedor",
   data: {
 
