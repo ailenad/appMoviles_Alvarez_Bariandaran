@@ -74,7 +74,7 @@ Vue.component('componente-cards',{
       <div class="contenedorLibros">
         <div class="banner"></div>
             <h1 class="tituloDisney"> {{titulo}} </h1>
-        <button @click="verFavoritos"> Ver favoritos </button>
+        <button @click="verFavoritos" @marca="recibe(favoritos=$event)"> Ver favoritos </button>
                 <hijos-cards v-for="x in libros" v-if="mostrarFavoritos "
                 v-bind:key="x.id"
                 v-bind:nombre="x.nombre" 
@@ -100,8 +100,10 @@ Vue.component('componente-cards',{
         verFavoritos(){
             this.mostrarFavoritos = true;
             this.libros = this.libros.filter(libros => libros.favoritos);
+        },
+        recibe:function(favoritos){
+            console.log("esta función recibió el valor : " + " " + favoritos)
         }
-
 
 
     }
@@ -122,17 +124,25 @@ Vue.component('hijos-cards', {
 })
 
 Vue.component('btn-favoritos', {
-    data:function(){
+     props:["favoritos"],
+     data:function(){
         return{
-            favoritos:false,
+            favoritos:true,
            
         }
     },
     template:`
     <div class="btnAgregar">
-    <button v-if="!favoritos" @click="favoritos=true" class="btn success">Agregar a Favoritos</button>
+    <button @click="cambiar(favoritos)" class="btn success"> Agregar a Favoritos </button>
     </div>
     `,
+    methods:{
+        cambiar: function (){
+            this.$emit('marca',this.favoritos);
+
+        }
+    }
+    
   
 })
 
