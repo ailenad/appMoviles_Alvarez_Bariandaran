@@ -7,6 +7,15 @@ body{
     font-style: normal;
     background-color: #51bec4;
 }
+
+
+.form-c{
+    margin:auto;
+    width: 800px;
+    background:#FFA07A;
+}
+
+
 .banner{
     background-image: url(/img/bannerDisney.png);
    background-repeat: no-repeat;

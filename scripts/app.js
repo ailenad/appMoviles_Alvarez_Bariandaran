@@ -149,6 +149,83 @@ Vue.component('btn-favoritos', {
 
 
 
+
+Vue.component('mi-formulario', {
+	data:function(){
+		return {
+			form_data:{
+				titulo:"",
+				autor:"",
+                descripcion:"",
+				categoria:[],
+				anio:""
+				},
+		array:[]
+		}
+
+	},
+template:`<div class="form">
+		<form v-on:submit.prevent>
+
+		<label>Nombre del libro</label>
+			<input type="text" v-model="form_data.titulo"  placeholder="Ingrese Titulo"/>
+
+		<label>Nombre del autor</label>
+				<textarea v-model="form_data.autor"></textarea>
+
+        <label>Descripción</label>
+		<textarea v-model="form_data.descripcion"></textarea>
+
+
+		<label>Categoria</label>
+
+		<select v-model="form_data.selected" multiple size="4">
+ 			<option>Princesas</option>
+  			<option>SuperHeroes</option>
+  			<option>Hechizos</option>
+  			<option>Villanos</option>
+		</select>
+		
+		<label>Año de lanzamiento</label>
+		<input v-model.number="form_data.anio" type="number">
+
+
+		<button @click="guardar(form_data)">Guardar</button>
+		
+
+		</form>
+		<div>
+			<h2>Tu libro</h2>
+				<ul>
+					<li v-for="item in array">
+					{{item.titulo}}, {{item.descripcion}}, {{item.autor}},
+					<span v-for="x in item.categoria">{{x}}, </span>,{{item.anio}}</li>
+				</ul>
+		</div>
+
+	</div>`,
+methods:{
+	guardar:function(form_data){
+	
+	console.log(typeof this.form_data.anio)
+		
+	if(!localStorage.dato){
+			this.array=[]
+		}else{
+			this.array=JSON.parse(localStorage.getItem("dato"))
+			}
+
+	this.array.push(form_data)
+	localStorage.setItem("dato",JSON.stringify(this.array))
+
+	console.log(this.array)
+}
+}
+
+});
+
+
+
 var app= new Vue({
 el: ".contenedor",
   data: {
