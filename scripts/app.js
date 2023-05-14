@@ -153,33 +153,40 @@ Vue.component('btn-favoritos', {
 Vue.component('mi-formulario', {
 	data:function(){
 		return {
-			form_data:{
-				titulo:"",
+				titulo:null,
 				autor:"",
                 descripcion:"",
 				categoria:[],
-				anio:""
-				},
-		array:[]
+				anio:null,
+			
+		array:[],
+        errores:[],
+		enviado: false,
 		}
 
 	},
+    computed : {
+        hayErrores: function(){
+            return this.errores.length; // Devuelve cantidad errores 
+        }
+    },
+
 template:`<div class="form">
-		<form v-on:submit.prevent>
+		<form v-on:submit.prevent="guardar" novalidate>
 
 		<label>Nombre del libro</label>
-			<input type="text" v-model="form_data.titulo"  placeholder="Ingrese Titulo"/>
+			<input type="text" v-model="titulo"/>
 
 		<label>Nombre del autor</label>
-				<textarea v-model="form_data.autor"></textarea>
+				<textarea v-model="autor"></textarea>
 
         <label>Descripción</label>
-		<textarea v-model="form_data.descripcion"></textarea>
+		<textarea v-model="descripcion"></textarea>
 
 
 		<label>Categoria</label>
 
-		<select v-model="form_data.selected" multiple size="4">
+		<select v-model="categoria" multiple size="1" name="categoria">
  			<option>Princesas</option>
   			<option>SuperHeroes</option>
   			<option>Hechizos</option>
@@ -187,14 +194,28 @@ template:`<div class="form">
 		</select>
 		
 		<label>Año de lanzamiento</label>
-		<input v-model.number="form_data.anio" type="number">
+		<input v-model.number="anio" name="anio" type="text">
 
-
-		<button @click="guardar(form_data)">Guardar</button>
+        <input type="submit" value="Enviar"/>
+		// <button class="btn-f" @click="guardar(form_data)">Guardar</button>
 		
-
 		</form>
-		<div>
+		
+        <div v-if="enviado === true">
+        <div v-if="hayErrores" class="classerror">
+         <ul>
+              <li v-for="x in errores" >{{x}}</li>
+        </ul>
+          </div>
+          <div v-else class="enviado">
+          <span>Enviado con éxito</span>
+      </div>
+     </div>
+
+    <div v-if="this.array.length > 0" >
+
+
+        <div>
 			<h2>Tu libro</h2>
 				<ul>
 					<li v-for="item in array">
@@ -203,24 +224,82 @@ template:`<div class="form">
 				</ul>
 		</div>
 
+        <div v-else class="classerror">
+        <p>No hay datos que mostrar, empezá a cargar tus libros!</p>
+    </div>
+
+
 	</div>`,
-methods:{
-	guardar:function(form_data){
+// methods:{
+// 	guardar:function(form_data){
 	
-	console.log(typeof this.form_data.anio)
+// 	console.log(typeof this.form_data.anio)
 		
-	if(!localStorage.dato){
-			this.array=[]
-		}else{
-			this.array=JSON.parse(localStorage.getItem("dato"))
-			}
+// 	if(!localStorage.dato){
+// 			this.array=[]
+// 		}else{
+// 			this.array=JSON.parse(localStorage.getItem("dato"))
+// 			}
 
-	this.array.push(form_data)
-	localStorage.setItem("dato",JSON.stringify(this.array))
+// 	this.array.push(form_data)
+// 	localStorage.setItem("dato",JSON.stringify(this.array))
 
-	console.log(this.array)
+// 	console.log(this.array)
+// }
+// }
+
+// });
+
+methods:{
+	guardar:function(){
+		//console.log(e) //evento del submit
+	//validacion
+       this.enviado = true; //queremos evaluar que los mensajes se muestren solo cuando se ejecute la funcion
+       this.errores=[] //vaciamos el array de errores
+             
+	  if (!this.titulo) {
+	  	console.log(!this.titulo)
+	   	this.errores.push('El titulo es obligatorio.');
+       
+      }
+      if(this.titulo && this.titulo.length < 3) {
+        this.errores.push('El título debe tener mas de 3 caracteres.');
+         
+      }
+      if(!this.categoria[0]){
+      	this.errores.push('Debe seleccionar un elemento.');
+      }
+      if (!this.anio) {
+        this.errores.push('El año es obligatorio.');
+        
+      }
+     	
+     if(this.errores.length == 0){
+     	     	 
+     nuevoObj = {
+     							descripcion: this.descripcion,
+						 			titulo: this.titulo,
+                                     autor: this.autor,
+						 			categoria: this.categoria,
+						 			anio: this.anio
+								}
+			
+      if(!localStorage.dato){
+					this.array=[]
+				}else{
+					this.array=JSON.parse(localStorage.getItem("dato"))
+				}
+
+				this.array.push(nuevoObj)
+				localStorage.setItem("dato",JSON.stringify(this.array))
+   		}
 }
-}
+
+}, //cierre de methods
+//cuando se monte la instancia...
+	mounted:function(){
+		this.array=JSON.parse(localStorage.getItem("dato")) || [] //solo si devuelve null o undefined creará el array
+	}
 
 });
 
