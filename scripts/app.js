@@ -74,16 +74,6 @@ Vue.component('componente-cards',{
       <div class="contenedorLibros">
         <div class="banner"></div>
             <h1 class="tituloDisney"> {{titulo}} </h1>
-        <button @click="verFavoritos" @marca="recibe(favoritos=$event)"> Ver favoritos </button>
-                <hijos-cards v-for="x in libros" v-if="mostrarFavoritos "
-                v-bind:key="x.id"
-                v-bind:nombre="x.nombre" 
-                v-bind:id="x.id"
-                v-bind:autor="x.autor" 
-                v-bind:descripcion="x.descripcion" 
-                v-bind:img="x.img"
-                v-bind:alt="x.alt">
-            </hijos-cards>
         <div class="contenedorPrincipal">
             <hijos-cards v-for="x in libros" v-if="x.favoritos===false"
                 v-bind:key="x.id"
@@ -93,53 +83,49 @@ Vue.component('componente-cards',{
                 v-bind:descripcion="x.descripcion" 
                 v-bind:img="x.img"
                 v-bind:alt="x.alt">
+                v-bind:favoritos="x.favoritos"
+                v-on:actualizar
             </hijos-cards>
         </div>
         </div>`,
-    methods:{
-        verFavoritos(){
-            this.mostrarFavoritos = true;
-            this.libros = this.libros.filter(libros => libros.favoritos);
-        },
-        recibe:function(favoritos){
-            console.log("esta función recibió el valor : " + " " + favoritos)
-        }
-
-
-    }
 })
 Vue.component('hijos-cards', {
  
    props:["img","clase","nombre","autor","descripcion","alt","id","favoritos"],
+   data() {
+    return {
+        esFavorito: this.favoritos
+    }
+},
    template:`
        <div class="contenedorHijo">
         <img v-bind:src="img" v-bind:alt="alt" class="portada"/>
         <h2 class="nombreLibro"> {{nombre}} </h2>
         <h3 class="nombreAutor" > {{autor}} </h3>
         <p class="descripcion"> {{descripcion}} </p>
-        <btn-favoritos @agregar-favorito></btn-favoritos>
-    
+        <btn-favoritos :favoritos="esFavorito" :cambiar="cambiar"></btn-favoritos>
         </div>
-   `
+   `,
+   methods:{
+    cambiar: function (){
+      this.esFavorito = !this.esFavorito;
+      this.$emit('actualizar', {id: this.id, favoritos: this.esFavorito});
+    
+    }
+  }
 })
 
 Vue.component('btn-favoritos', {
-     props:["favoritos"],
-     data:function(){
-        return{
-            favoritos:true,
-           
-        }
-    },
-    template:`
-    <div class="btnAgregar">
-    <button @click="cambiar(favoritos)" class="btn success"> Agregar a Favoritos </button>
-    </div>
-    `,
+    props:["favoritos"],
+     template:`
+     <div class="btnAgregar">
+     <button @click="cambiar" class="btn success">{{favoritos ? 'Ahora es uno de tus favoritos!' : 'Agregar a Favoritos'}}</button>
+     </div>
+     `,
     methods:{
         cambiar: function (){
-            this.$emit('marca',this.favoritos);
-
+            // this.$emit('cambiar');
+           this.favoritos = true;
         }
     }
     
