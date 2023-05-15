@@ -154,6 +154,7 @@ Vue.component('lista-favoritos', {
   template: `
   <div>
   <h2 class="titulo">{{tituloF}}</h2>
+  <div class="contenedorPadre">
     <div v-for="libro in libros" v-if="libro.favoritos" class="contenedorHijo">
 
           <img :src="libro.img" :alt="libro.alt">
