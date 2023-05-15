@@ -129,13 +129,13 @@ background-color: #04314e;
     justify-content: space-between;
     text-align: center;
 }
-ul{
+/* .l-fav{
     display: flex;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 10px;
     margin: auto;
     width: 80%;
-}
+} */
 
 input[type="submit"]{
     display: block;
