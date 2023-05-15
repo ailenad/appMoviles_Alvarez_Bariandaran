@@ -229,14 +229,15 @@ template:`<div class="formulario">
 	      </div>
  		</div>
 
-		<div v-if="this.arr.length > 0" >
-			<h2>Tu libro</h2>
-				<ul>
-					<li v-for="item in arr" >
-					{{item.titulo}}, {{item.descripcion}}, {{item.autor}},
-					<span v-for="x in item.categoria">{{x}}, </span>{{item.anio}}</li>
-				</ul>
-	
+		<div class="contenedorPrincipal" v-if="this.arr.length > 0" >
+			<h1>Tu libro</h1>
+            <div class="contenedorMos" v-for="item in arr">
+            <h2 class="nombreLibro">{{item.titulo}}</h2>
+            <h3 class="nombreAutor">{{item.autor}}</h3>
+            <p class="descripcion">{{item.descripcion}}</p>
+            <span v-for="x in item.categoria">{{x}}, </span>
+            <p>{{item.anio}}</p>
+            </div>
 		</div>
 		<div v-else class="classerror">
 			<p>No hay datos que mostrar, empezá a cargar tus libros!</p>
