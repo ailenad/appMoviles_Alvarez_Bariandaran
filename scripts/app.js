@@ -132,7 +132,7 @@ Vue.component('hijos-cards', {
 Vue.component('btn-favoritos', {
   props:["favoritos"],
    template:`
-   <div=>
+   <div>
    <button @click="cambiar" class="btnAgregar success ">{{favoritos ? 'Ahora es uno de tus favoritos!' : 'Agregar a Favoritos'}}</button>
    </div>
    `,
@@ -154,6 +154,7 @@ Vue.component('lista-favoritos', {
   template: `
   <div>
   <h2 class="titulo">{{tituloF}}</h2>
+  <div class="crear">
     <ul>
       <li v-for="libro in libros" v-if="libro.favoritos" class="contenedorHijo">
         <img :src="libro.img" :alt="libro.alt">
@@ -163,167 +164,139 @@ Vue.component('lista-favoritos', {
       </li>
       <hijos-cards 
     </ul>
+    </div>
   </div>
 `,
 
 })
 
+Vue.component('mi-formulario', {
+	data:function(){
+		return {
+				titulo:null,
+				autor:"",
+                descripcion:"",
+				categoria:[],
+				anio:null,
+										
+		arr:[],
+		errores:[],
+		enviado: false,
+		}
 
+	},
+	computed : {
+    hayErrores: function(){
+    	return this.errores.length; // Devuelve cantidad errores 
+    }
+},
+template:`<div class="formulario">
+		<form v-on:submit.prevent="guardar" novalidate >
 
-// Vue.component('mi-formulario', {
-// 	data:function(){
-// 		return {
-// 				titulo:null,
-// 				autor:"",
-//                 descripcion:"",
-// 				categoria:[],
-// 				anio:null,
-			
-// 		array:[],
-//         errores:[],
-// 		enviado: false,
-// 		}
+		<label>Nombre del libro</label>
+			<input type="text" v-model="titulo"  placeholder="Ingrese Titulo" name="titulo" />
 
-// 	},
-//     computed : {
-//         hayErrores: function(){
-//             return this.errores.length; // Devuelve cantidad errores 
-//         }
-//     },
-
-// template:`<div class="form">
-// 		<form v-on:submit.prevent="guardar" novalidate>
-
-// 		<label>Nombre del libro</label>
-// 			<input type="text" v-model="titulo"/>
-
-// 		<label>Nombre del autor</label>
-// 				<textarea v-model="autor"></textarea>
-
-//         <label>Descripción</label>
-// 		<textarea v-model="descripcion"></textarea>
-
-
-// 		<label>Categoria</label>
-
-// 		<select v-model="categoria" multiple size="1" name="categoria">
-//  			<option>Princesas</option>
-//   			<option>SuperHeroes</option>
-//   			<option>Hechizos</option>
-//   			<option>Villanos</option>
-// 		</select>
+		<label>Nombre del autor</label>
+        <input type="text" v-model="autor"  placeholder="Ingrese el nombre del autor" name="autor" />
 		
-// 		<label>Año de lanzamiento</label>
-// 		<input v-model.number="anio" name="anio" type="text">
 
-//         <input type="submit" value="Enviar"/>
-// 		// <button class="btn-f" @click="guardar(form_data)">Guardar</button>
+        <label>Descripción</label>
+		<textarea v-model="descripcion" name="descripcion"></textarea>
+
+		<label>Categoria</label>
+
+		<select v-model="categoria" multiple size="1" name="categoria">
+        <option>Princesas</option>
+        <option>SuperHeroes</option>
+        <option>Hechizos</option>
+        <option>Villanos</option>
+		</select>
 		
-// 		</form>
-		
-//         <div v-if="enviado === true">
-//         <div v-if="hayErrores" class="classerror">
-//          <ul>
-//               <li v-for="x in errores" >{{x}}</li>
-//         </ul>
-//           </div>
-//           <div v-else class="enviado">
-//           <span>Enviado con éxito</span>
-//       </div>
-//      </div>
-
-//     <div v-if="this.array.length > 0" >
+		<label>Año de lanzamiento</label>
+		<input v-model.number="anio" name="anio" type="text"  />
 
 
-//         <div>
-// 			<h2>Tu libro</h2>
-// 				<ul>
-// 					<li v-for="item in array">
-// 					{{item.titulo}}, {{item.descripcion}}, {{item.autor}},
-// 					<span v-for="x in item.categoria">{{x}}, </span>,{{item.anio}}</li>
-// 				</ul>
-// 		</div>
+		<input type="submit" value="Enviar"/>
+		</form>
 
-//         <div v-else class="classerror">
-//         <p>No hay datos que mostrar, empezá a cargar tus libros!</p>
-//     </div>
+		<div v-if="enviado === true">
+			<div v-if="hayErrores" class="classerror">
+			 <ul>
+	     		 <li v-for="x in errores" >{{x}}</li>
+	    	</ul>
+	  		</div>
+	  		<div v-else class="enviado">
+	          <span>Enviado con éxito</span>
+	      </div>
+ 		</div>
 
-
-// 	</div>`,
-// // methods:{
-// // 	guardar:function(form_data){
+		<div v-if="this.arr.length > 0" >
+			<h2>Tu libro</h2>
+				<ul>
+					<li v-for="item in arr" >
+					{{item.titulo}}, {{item.descripcion}}, {{item.autor}},
+					<span v-for="x in item.categoria">{{x}}, </span>{{item.anio}}</li>
+				</ul>
 	
-// // 	console.log(typeof this.form_data.anio)
+		</div>
+		<div v-else class="classerror">
+			<p>No hay datos que mostrar, empezá a cargar tus libros!</p>
+		</div>
+
 		
-// // 	if(!localStorage.dato){
-// // 			this.array=[]
-// // 		}else{
-// // 			this.array=JSON.parse(localStorage.getItem("dato"))
-// // 			}
-
-// // 	this.array.push(form_data)
-// // 	localStorage.setItem("dato",JSON.stringify(this.array))
-
-// // 	console.log(this.array)
-// // }
-// // }
-
-// // });
-
-// methods:{
-// 	guardar:function(){
-// 		//console.log(e) //evento del submit
-// 	//validacion
-//        this.enviado = true; //queremos evaluar que los mensajes se muestren solo cuando se ejecute la funcion
-//        this.errores=[] //vaciamos el array de errores
+	</div>`,
+methods:{
+	guardar:function(){
+		//console.log(e) //evento del submit
+	//validacion
+       this.enviado = true; //queremos evaluar que los mensajes se muestren solo cuando se ejecute la funcion
+       this.errores=[] //vaciamos el array de errores
              
-// 	  if (!this.titulo) {
-// 	  	console.log(!this.titulo)
-// 	   	this.errores.push('El titulo es obligatorio.');
+	  if (!this.titulo) {
+	  	console.log(!this.titulo)
+	   	this.errores.push('El titulo es obligatorio.');
        
-//       }
-//       if(this.titulo && this.titulo.length < 3) {
-//         this.errores.push('El título debe tener mas de 3 caracteres.');
+      }
+      if(this.titulo && this.titulo.length < 3) {
+        this.errores.push('Debe tener mas de 3 caracteres.');
          
-//       }
-//       if(!this.categoria[0]){
-//       	this.errores.push('Debe seleccionar un elemento.');
-//       }
-//       if (!this.anio) {
-//         this.errores.push('El año es obligatorio.');
+      }
+      if(!this.categoria[0]){
+      	this.errores.push('Debe seleccionar un elemento.');
+      }
+      if (!this.anio) {
+        this.errores.push('El año es obligatorio.');
         
-//       }
+      }
      	
-//      if(this.errores.length == 0){
+     if(this.errores.length == 0){
      	     	 
-//      nuevoObj = {
-//      							descripcion: this.descripcion,
-// 						 			titulo: this.titulo,
-//                                      autor: this.autor,
-// 						 			categoria: this.categoria,
-// 						 			anio: this.anio
-// 								}
+     nuevoObj = {
+        descripcion: this.descripcion,
+        titulo: this.titulo,
+        autor: this.autor,
+        categoria: this.categoria,
+        anio: this.anio
+								}
 			
-//       if(!localStorage.dato){
-// 					this.array=[]
-// 				}else{
-// 					this.array=JSON.parse(localStorage.getItem("dato"))
-// 				}
+      if(!localStorage.dato){
+					this.arr=[]
+				}else{
+					this.arr=JSON.parse(localStorage.getItem("dato"))
+				}
 
-// 				this.array.push(nuevoObj)
-// 				localStorage.setItem("dato",JSON.stringify(this.array))
-//    		}
-// }
+				this.arr.push(nuevoObj)
+				localStorage.setItem("dato",JSON.stringify(this.arr))
+   		}
+}
 
-// }, //cierre de methods
-// //cuando se monte la instancia...
-// 	mounted:function(){
-// 		this.array=JSON.parse(localStorage.getItem("dato")) || [] //solo si devuelve null o undefined creará el array
-// 	}
+}, //cierre de methods
+//cuando se monte la instancia...
+	mounted:function(){
+		this.arr=JSON.parse(localStorage.getItem("dato")) || [] //solo si devuelve null o undefined creará el array
+	}
 
-// });
-
-
+});
 
 var app= new Vue({
 el: ".contenedor",

@@ -108,3 +108,29 @@ background-color: #04314e;
     font-weight: bold;
     cursor: pointer;
 }
+.crear{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+ul{
+    display: flex;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 10px;
+    margin: auto;
+    width: 80%;
+}
+
+input[type="submit"]{
+    display: block;
+    margin: auto;
+    margin-top: 3%;
+    background-color: #51bec4;
+    color: aliceblue;
+    width: 80px;
+    border-radius: 15px;
+    font-size: 13px;
+    padding: 5px;
+}
