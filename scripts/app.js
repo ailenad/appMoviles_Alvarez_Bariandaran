@@ -176,15 +176,15 @@ Vue.component('mi-formulario', {
 				categoria:[],
 				anio:null,
 										
-		arr:[],
+		array:[],
 		errores:[],
-		enviado: false,
+		envio: false,
 		}
 
 	},
 	computed : {
-    hayErrores: function(){
-    	return this.errores.length; // Devuelve cantidad errores 
+    error: function(){
+    	return this.errores.length; 
     }
 },
 template:`<div class="formulario">
@@ -216,20 +216,20 @@ template:`<div class="formulario">
 		<input type="submit" value="Enviar"/>
 		</form>
 
-		<div v-if="enviado === true">
-			<div v-if="hayErrores" class="classerror">
+		<div v-if="envio === true">
+			<div v-if="error" class="classerror">
 			 <ul>
 	     		 <li v-for="x in errores" >{{x}}</li>
 	    	</ul>
 	  		</div>
-	  		<div v-else class="enviado">
-	          <span>Enviado con éxito</span>
+	  		<div v-else class="envio">
+	          <span>Gracias por sumar libros!</span>
 	      </div>
  		</div>
 
-		<div class="contenedorPrincipal" v-if="this.arr.length > 0" >
+		<div class="contenedorPrincipal" v-if="this.array.length > 0" >
 			<h1>Tu libro</h1>
-            <div class="contenedorMos" v-for="item in arr">
+            <div class="contenedorMos" v-for="item in array">
             <h2 class="nombreLibro">{{item.titulo}}</h2>
             <h3 class="nombreAutor">{{item.autor}}</h3>
             <p class="descripcion">{{item.descripcion}}</p>
@@ -238,32 +238,30 @@ template:`<div class="formulario">
             </div>
 		</div>
 		<div v-else class="classerror">
-			<p>No hay datos que mostrar, empezá a cargar tus libros!</p>
+			<p>¡Comenzá a cargar tus libros!</p>
 		</div>
 
 		
 	</div>`,
 methods:{
 	guardar:function(){
-		//console.log(e) //evento del submit
-	//validacion
-       this.enviado = true; //queremos evaluar que los mensajes se muestren solo cuando se ejecute la funcion
-       this.errores=[] //vaciamos el array de errores
+       this.envio = true; 
+       this.errores=[] 
              
 	  if (!this.titulo) {
 	  	console.log(!this.titulo)
 	   	this.errores.push('El titulo es obligatorio.');
        
       }
-      if(this.titulo && this.titulo.length < 3) {
-        this.errores.push('Debe tener mas de 3 caracteres.');
+      if(this.titulo && this.titulo.length < 2) {
+        this.errores.push('El título tiene que tener mas de 2 caracteres.');
          
       }
       if(!this.categoria[0]){
-      	this.errores.push('Debe seleccionar un elemento.');
+      	this.errores.push('Tenés que seleccionar una categoria.');
       }
       if (!this.anio) {
-        this.errores.push('El año es obligatorio.');
+        this.errores.push('El año de publicación es obligatorio.');
         
       }
      	
@@ -277,21 +275,20 @@ methods:{
         anio: this.anio
 								}
 			
-      if(!localStorage.dato){
-					this.arr=[]
+      if(!localStorage.info){
+					this.array=[]
 				}else{
-					this.arr=JSON.parse(localStorage.getItem("dato"))
+					this.array=JSON.parse(localStorage.getItem("info"))
 				}
 
-				this.arr.push(nuevoObj)
-				localStorage.setItem("dato",JSON.stringify(this.arr))
+				this.array.push(nuevoObj)
+				localStorage.setItem("info",JSON.stringify(this.array))
    		}
 }
 
-}, //cierre de methods
-//cuando se monte la instancia...
+}, 
 	mounted:function(){
-		this.arr=JSON.parse(localStorage.getItem("dato")) || [] //solo si devuelve null o undefined creará el array
+		this.array=JSON.parse(localStorage.getItem("info")) || [] 
 	}
 
 });
