@@ -69,7 +69,6 @@ background-color: #04314e;
     justify-content: space-between;
     text-align: center;
     border-radius: 25px;
-
 }
 .portada{
   margin-top: 15px;
@@ -95,4 +94,17 @@ background-color: #04314e;
     width: 260px;
     font-size: 20px;
 }
-
+.btnAgregar{
+    width: 200px;
+    background-color: #04314e;
+    color: aliceblue;
+    border-radius: 15px;
+    font-size: 16px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+.btnAgregar:hover{
+    background-color: #2F4C73;
+    font-weight: bold;
+    cursor: pointer;
+}

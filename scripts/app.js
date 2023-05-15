@@ -132,8 +132,8 @@ Vue.component('hijos-cards', {
 Vue.component('btn-favoritos', {
   props:["favoritos"],
    template:`
-   <div class="btnAgregar">
-   <button @click="cambiar" class="btn success">{{favoritos ? 'Ahora es uno de tus favoritos!' : 'Agregar a Favoritos'}}</button>
+   <div=>
+   <button @click="cambiar" class="btnAgregar success ">{{favoritos ? 'Ahora es uno de tus favoritos!' : 'Agregar a Favoritos'}}</button>
    </div>
    `,
   methods:{
