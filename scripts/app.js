@@ -9,7 +9,7 @@ Vue.component('componente-cards',{
           clase: "no fav",
           favoritos: false,
           nombre: "La Sirenita",
-          autor: "Hans Christian Andersen",
+          autor: "hans christian andersen",
           descripcion: "La Sirenita es la historia de una niña llamada Ariel que sueña por conocer el mundo de los humanos. Un día se desata una enorme tormenta que hace naufragar un barco y Ariel rescatará a un apuesto joven de el mar, el príncipe Eric, del que se enamorará.",
           alt:"Imagen la sirenita"
       },
@@ -114,8 +114,8 @@ Vue.component('hijos-cards', {
   template:`
       <div class="contenedorHijo">
        <img :src="img" :alt="alt" class="portada"/>
-       <h2 class="nombreLibro">{{nombre}}</h2>
-       <h3 class="nombreAutor">{{autor}}</h3>
+       <h2 class="nombreLibro">{{nombre | uppercase}}</h2>
+       <h3 class="nombreAutor">{{autor | capitalize}}</h3>
        <p class="descripcion">{{descripcion}}</p>
        <btn-favoritos :favoritos="esFavorito" @cambiar="cambiar"></btn-favoritos>
       </div>
@@ -162,7 +162,6 @@ Vue.component('lista-favoritos', {
         <p class="descripcion"> {{ libro.descripcion }}</p>
         <p class="nombreAutor">Autor: {{ libro.autor }}</p>
       </li>
-      <hijos-cards 
     </ul>
     </div>
   </div>

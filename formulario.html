@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca de Disney</title>
     <script src="scripts/vue.js"></script>
-    <script src="scripts/vue2-filters.js"></script>
+
     <link rel="stylesheet" href="css/estilos.css" />
 </head>
 <body>
@@ -15,13 +15,18 @@
             <ul>
                 <a href="index.html">Biblioteca de disney</a>
                 <li><a href="formulario.html">Agregar un libro a tu lista</a></li>
+
             </ul>
         </nav>
-
-        <componente-cards>  </componente-cards>
+        
+        <div class="form-c" v-cloak>
+            <h1>Formulario</h1> 
+    
+            <mi-formulario ></mi-formulario>
+    
+        </div>
 
     </main>
     <script src="scripts/app.js"></script>
-
 </body>
 </html>
