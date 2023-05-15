@@ -155,8 +155,6 @@ Vue.component('lista-favoritos', {
   <div>
   <h2 class="tituloDisney">{{tituloF}}</h2>
   <div class="contenedorPrincipal">
-  <h2 class="titulo">{{tituloF}}</h2>
-  <div class="contenedorPadre">
     <div v-for="libro in libros" v-if="libro.favoritos" class="contenedorHijo">
           <img :src="libro.img" :alt="libro.alt">
           <p class="nombreLibro">{{ libro.nombre }}</p>
@@ -235,7 +233,7 @@ template:`<div class="formulario">
             <h2 class="nombreLibro">{{item.titulo}}</h2>
             <h3 class="nombreAutor">{{item.autor}}</h3>
             <p class="descripcion">{{item.descripcion}}</p>
-            <span v-for="x in item.categoria">{{x}}, </span>
+            <span v-for="x in item.categoria">{{x}} </span>
             <p>{{item.anio}}</p>
             </div>
 		</div>
