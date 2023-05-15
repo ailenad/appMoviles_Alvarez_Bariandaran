@@ -93,11 +93,11 @@ Vue.component('componente-cards',{
               >
           </hijos-cards>
       </div>
-      <div class="contenedorPrincipal">
-      <lista-favoritos
-      v-bind:libros="libros"
-      >
-      </lista-favoritos>
+      <div>
+          <lista-favoritos
+          v-bind:libros="libros"
+          >
+          </lista-favoritos>
       </div>
       </div>`,
     
@@ -153,15 +153,15 @@ Vue.component('lista-favoritos', {
   },
   template: `
   <div>
-  <h2 class="titulo">{{tituloF}}</h2>
+  <h2 class="tituloDisney">{{tituloF}}</h2>
+  <div class="contenedorPrincipal">
     <div v-for="libro in libros" v-if="libro.favoritos" class="contenedorHijo">
-
           <img :src="libro.img" :alt="libro.alt">
           <p class="nombreLibro">{{ libro.nombre }}</p>
           <p class="descripcion"> {{ libro.descripcion }}</p>
           <p class="nombreAutor">Autor: {{ libro.autor }}</p>
       </div>  
-  
+  </div>  
   </div>
 `,
 

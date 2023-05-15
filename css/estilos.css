@@ -122,20 +122,6 @@ background-color: #04314e;
     font-weight: bold;
     cursor: pointer;
 }
-.crear{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    text-align: center;
-}
-/* .l-fav{
-    display: flex;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 10px;
-    margin: auto;
-    width: 80%;
-} */
 
 input[type="submit"]{
     display: block;
@@ -147,4 +133,28 @@ input[type="submit"]{
     border-radius: 15px;
     font-size: 13px;
     padding: 5px;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #2A2758;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: #111;
 }
