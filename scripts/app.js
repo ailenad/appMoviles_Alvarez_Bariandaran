@@ -207,6 +207,7 @@ template:`<div class="formulario">
         <option>SuperHeroes</option>
         <option>Hechizos</option>
         <option>Villanos</option>
+        <option>Otros</option>
 		</select>
 		
 		<label>Año de lanzamiento</label>
